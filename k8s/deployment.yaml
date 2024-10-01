@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: foodway-api
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: foodway-api
+  template:
+    metadata:
+      labels:
+        app: foodway-api
+    spec:
+      containers:
+      - name: foodway-api
+        image: 463470970637.dkr.ecr.us-east-1.amazonaws.com/foodway-api:latest #substituir pela iamgem gerada
+        ports:
+        - containerPort: 80
+        env:
+        - name: DB_CONNECTION_STRING
+          value: "Host=foodway-postegres-instance.cpacesu4acyh.us-east-1.rds.amazonaws.com;Port=5432;Database=foodway;User Id=username;Password=123FoodWay4;"
